@@ -1,17 +1,15 @@
-[project]
+[tool.poetry]
 name = "credit-simulator"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "eden",email = "yangsehyuk1117@gmail.com"}
-]
+authors = ["eden <yangsehyuk1117@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.11"
-dependencies = [
-    "pandas (>=3.0.2,<4.0.0)",
-    "python-dotenv (>=1.2.2,<2.0.0)"
-]
 
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+pandas = "^3.0.2"
+python-dotenv = "^1.2.2"
+finance-datareader = "^0.9.110"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
