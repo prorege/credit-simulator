@@ -3,21 +3,23 @@ import requests
 API_KEY = "6544dd16cd587e13be1a314b5cb6223644cdebff"
 
 def get_financial_statement(corp_code: str, year: str, report_type: str = "11011") -> dict:
-    """
-    corp_code: 기업코드 (8자리)
-    year: 사업연도 (예: "2023")
-    report_type: 11011=사업보고서, 11012=반기, 11013=1분기, 11014=3분기
-    """
     url = "https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json"
-    params = {
-        "crtfc_key": API_KEY,
-        "corp_code": corp_code,
-        "bsns_year": year,
-        "reprt_code": report_type,
-        "fs_div": "CFS",  # CFS=연결, OFS=별도
-    }
-    res = requests.get(url, params=params)
-    return res.json()
+    
+    # CFS 먼저 시도, 없으면 OFS
+    for fs_div in ["CFS", "OFS"]:
+        params = {
+            "crtfc_key": API_KEY,
+            "corp_code": corp_code,
+            "bsns_year": year,
+            "reprt_code": report_type,
+            "fs_div": fs_div,
+        }
+        res = requests.get(url, params=params)
+        data = res.json()
+        if data.get("status") == "000":
+            return data
+    
+    return {"status": "999", "message": "CFS/OFS 모두 없음"}
             
 def extract_key_metrics(data: list) -> dict:
     """핵심 재무지표 추출 - sj_div 기준으로 정확히 매핑"""
