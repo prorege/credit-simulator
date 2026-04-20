@@ -7,8 +7,8 @@ if __name__ == "__main__":
         {"corp_code": "00126380", "corp_name": "삼성전자"},
         {"corp_code": "00164779", "corp_name": "SK하이닉스"},
         {"corp_code": "00401731", "corp_name": "카카오"},
-        {"corp_code": "00247243", "corp_name": "현대차"},
-        {"corp_code": "00108662", "corp_name": "LG전자"},
+        {"corp_code": "00164742", "corp_name": "현대차"},
+        {"corp_code": "00215243", "corp_name": "LG전자"},
     ]
 
     results = []
